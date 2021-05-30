@@ -1,0 +1,65 @@
+<div class="position-relative mb-5">
+  <div id="header-img">
+    <h1 class="text-uppercase text-white container">Regression learning with<br>feed-forward Neural Network</h1>
+  </div>
+  <a href="#ki-training" class="btn-scroll position-absolute d-flex justify-content-center align-items-center">
+    <fa-icon [icon]="faArrowDown"></fa-icon>
+  </a>
+</div>
+<div id="ki-training" class="container py-5">
+  <h2 class="text-uppercase text-center pb-3 mb-5">Find the best settings to train the AI</h2>
+  <form [formGroup]="parameterForm" (ngSubmit)="onSubmit()">
+    <div class="row justify-content-center">
+      <div class="form-group col-3">
+        <label for="hidden" class="form-label">Number of hidden layer</label>
+        <input type="number" id="hidden" class="form-control" formControlName="hidden">
+      </div>
+      <div class="form-group col-3">
+        <label for="neuron" class="form-label">Number of neurons</label>
+        <input type="number" id="neuron" class="form-control" formControlName="neuron">
+      </div>
+      <div class="form-group col-3">
+        <label for="activation" class="form-label">Activation</label>
+        <select name="activation" id="activation" class="form-select" formControlName="activation">
+          <option *ngFor="let activation of activationIdentifier()" [value]="activation">
+            {{ activation }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row my-3 justify-content-center">
+      <div class="form-group col-3">
+        <label for="learning-rate" class="form-label">Learning rate</label>
+        <input type="number" id="learning-rate" class="form-control" formControlName="learningRate">
+      </div>
+      <div class="form-group col-3">
+        <label for="optimizer" class="form-label">Optimizer</label>
+        <select name="optimizer" id="optimizer" class="form-select" formControlName="optimizer">
+          <option *ngFor="let optimizer of optimizers()" [value]="optimizer">
+            {{ optimizer }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group col-3">
+        <label for="epochs" class="form-label">Number of epochs</label>
+        <input type="number" id="epochs" class="form-control" formControlName="epochs">
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <button type="submit" class="btn btn-primary mt-4 col-2">
+        <div class="spinner-border" role="status" *ngIf="isTraining">
+          <span class="sr-only">Training...</span>
+        </div>
+        <div *ngIf="!isTraining">Start training</div>
+      </button>
+    </div>
+  </form>
+</div>
+<app-model *ngIf="parameters"
+           [parameters]="parameters"
+           (isTraining)="setLoadingSpinner($event)"
+           class="col-7">
+</app-model>
+

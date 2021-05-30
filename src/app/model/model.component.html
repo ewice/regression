@@ -1,0 +1,38 @@
+<div id="model" class="mb-5" *ngIf="!training">
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <canvas baseChart
+                [datasets]="scatterChartData"
+                [options]="scatterChartOptions"
+                [type]="scatterChartType">
+        </canvas>
+        <div class="row">
+          <div class="col" id="loss"></div>
+          <div class="col" id="mse"></div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <h2 class="mb-5">Let's test your trained model</h2>
+          <form [formGroup]="predictForm" (ngSubmit)="predictValue()">
+            <div class="form-group">
+              <label for="predict" class="form-label">X value</label>
+              <input type="number" id="predict" class="form-control" formControlName="xValue">
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Predict</button>
+          </form>
+          <div *ngIf="predictedYValue && actualYValue" class="mt-5">
+            <p>Predicted Y value: {{ predictedYValue }}</p>
+            <p>Actual value: {{ actualYValue }}</p>
+          </div>
+        </div>
+        <p class="fw-bold mt-5">If you are interested in my results, then click here: </p>
+        <button class="btn btn-secondary" routerLink="documentation">
+          Learn more
+          <fa-icon [icon]="faArrowRight"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

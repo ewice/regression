@@ -1,0 +1,15 @@
+export enum ActivationIdentifier {
+  'elu' = 'elu',
+  'hardSigmoid' = 'hardSigmoid',
+  'linear' = 'linear',
+  'relu' = 'relu',
+  'relu6' = 'relu6',
+  'selu' = 'selu',
+  'sigmoid' = 'sigmoid',
+  'softmax' = 'softmax',
+  'softplus' = 'softplus',
+  'softsign' = 'softsign',
+  'tanh' = 'tanh',
+  'swish' = 'swish',
+  'mish' = 'mish',
+}

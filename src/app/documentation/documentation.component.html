@@ -1,0 +1,70 @@
+<div class="container">
+  <h1>Documentation</h1>
+  <p>EA 3: Regression mit FFNN</p>
+
+  <h2>Herangehensweise</h2>
+  <p>Die Umsetzung der dritten Aufgabe erfolgte in mehreren Schritten. Zunächst wurden die Kapitel 1 - 13 des
+    Lernmaterials durchgearbeitet und mit den Tutorials und Dokumentationen Wissen zum TensorflowJS-Framework aufgebaut.
+    Im nächsten Schritt ist das Angular Projekt (v12.0.1) aufgesetzt und die Frameworks und Bibliotheken integriert
+    worden. Für das Stylen und Erstellen des Layouts kamen Bootstrap und SASS/CSS zum Einsatz. Beim Aufbau wurde auf
+    eine dynamische Entgegennahme verschiedener Parameter geachtet, damit die verschiedenen Einstellungsmöglichkeiten am
+    Model getestet und Erkenntnisse gesammelt werden können. Um die Genauigkeit des Trainings schnell nachvollziehen zu
+    können, wurde primär auf die Visualisierung mithilfe eines Scatterplot-Diagramms zurückgegriffen. Hier können die
+    Originaldaten und die vorgesagten Daten eingesehen werden. Für die Vorhersage eines einzelnen Wertes gibt es ein
+    zusätzliches Eingabefeld. Der grundlegende Datensatz umfasste 801 Daten (-x = [-400, 400]) und das Model wurde nach
+    der Umwandlung in Tensoren damit trainiert. Das Training wurde durch weitere Faktoren wie "Anzahl der hidden
+    Layers", "Anzahl der Neuronen", "Aktivierungsfunktion", "Lernrate", "Optimizer" und "Anzahl der Epochen"
+    beeinflusst. Danach ging es ans Ausprobieren...</p>
+
+  <h2>Bias und Varianz</h2>
+  <p>Sind die Datenqualität und/oder das Model zu schlecht, werden die Ergebnisse des Trainings/Validierungsset genauso
+    sein. Ein geringes Bias sorgt für Underfitting.<br> Ist hingegen das Model zu komplex und man erhält gute Ergebnisse für die Trainingsdaten, aber nicht für die
+    Testdaten, spricht man von Varianz oder Overfitting.</p>
+
+  <h2>Erkenntnisse</h2>
+  <p>Das beste Ergebnis (Low Bias/Low Variance) konnte ich mit den folgenden Einstellungen erreichen:</p>
+  <ul>
+    <li>Anzahl der hidden Layers: 10</li>
+    <li>Anzahl der Neuronen: 50</li>
+    <li>Aktivierungsfunktion: relu6</li>
+    <li>Anzahl der Epochen: 50</li>
+  </ul>
+  <p>
+    Das Testen begann mit dem Einstellen von 10 Epochen und schon dort lag der MSE unter 0.1 und wurde am Anfang
+    weiterhin verwendet. Danach wurde die Anzahl der Trainingsdaten ausprobiert und mit einer Menge von 3001 Daten
+    begonnen, welches bereits für gute Vorhersagen gesorgt hat. Weitere Anpassungen haben wurden an den hidden Layern
+    mit 50 Units und der Activiation "relu" durchgeführt. Bei einer Verringerung der Testdaten auf 301, wurden die
+    Ergebnisse für die unbekannten Daten schlechter. Eine Erhöhung der Trainingsdaten auf 801 führte dazu, dass sich die
+    Vorhersagen annähern. Als Nächstes wurden weitere Hidden Layern hinzugefügt. Der Loss und der MSE näherten sich
+    dabei 0. Eine Steigerung der Batchsize führte zu keiner Verbesserung.
+    Weitere Anpassungen bzw. höhere Werte haben hier zu keinen besseren Ergebnissen geführt. Sobald ein gewisser
+    Schwellenwert erreicht wurde, konnten keine signifikant besseren Werte erzielt werden, welche die zusätzliche
+    Rechenleistung rechtfertigen würden. Waren die Parameter und die Daten zu gering, wurde ein High Bias (Hohe
+    Entfernung der vorhergesagten Werte zur den Trainingsdaten) und somit ein Under-Fitting festgestellt.</p>
+
+  <h2>Technische Dokumentation: Quellen und Bibliotheken</h2>
+  <ul>
+    <li>Tensorflow.js Tutorials / Dokumentation: Hier wurde das hinterlegt Tutorial durchgearbeitet und die
+      Dokumentation für die Verbesserung und/oder Überarbeitung des Tutorial-Ergebnisses genutzt.
+    </li>
+    <li>Angular v12.0.1 (Frontend Framework): Bietet als JavaScript-Framework eine bessere Verarbeitung der Daten und
+      einfachere Manupulation des DOMs.
+    </li>
+    <li>Bootstrap v5.0.1 (Frontend Framework): Wird zum Stylen und Erstellen des Layouts der Anwendung genutzt. Die
+      hinterlegten CSS-Klassen ermöglichen einen grundlegenden Aufbau und sind durch Überschreibung/Ergänzung schnell
+      anpassbar.
+    </li>
+    <li>Ng2-Chart/Chart.js (Datenvisualisierung): Wurde zum Ersetzen des Tensorflow Visors benutzt, weil es bessere
+      Anpassungsmöglichkeiten bietet.
+    </li>
+  </ul>
+
+  <h2>Fachliche Dokumentation</h2>
+  <p>Die grundlegende Logik wurde aus dem
+    <a target="_blank" href="https://www.tensorflow.org/js/tutorials/training/linear_regression">
+      "Making predictions from 2d data"
+    </a>
+    Tutorial übernommen und nur kleinere Anpassungen vorgenommen. Es können nun dynamisch Parameter angepasst werden
+    und es wurde von Visor auf Chart.js gewechselt. Weitere Anpassungen erfolgt zur besseren Verarbeitung und Austausch
+    (zwischen Komponenten) der Daten in Angular.</p>
+</div>
